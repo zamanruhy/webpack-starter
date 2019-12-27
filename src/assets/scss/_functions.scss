@@ -1,0 +1,66 @@
+@function strip-unit($number) {
+  @if type-of($number) == "number" and not unitless($number) {
+    @return $number / ($number * 0 + 1);
+  }
+
+  @return $number;
+}
+
+@function rem($px, $root: 16) {
+  $px: strip-unit($px);
+  $root: strip-unit($root);
+  @return $px / $root * 1rem;
+}
+
+@function em($px, $context) {
+  $px: strip-unit($px);
+  $context: strip-unit($context);
+  @return $px / $context * 1em;
+}
+
+@function vw($px, $root: $max-width) {
+  $px: strip-unit($px);
+  $root: strip-unit($root);
+  @return $px / $root * 100 * 1vw;
+}
+
+@function vh($px, $root: 850) {
+  $px: strip-unit($px);
+  $root: strip-unit($root);
+  @return $px / $root * 100 * 1vh;
+}
+
+@function str-replace($string, $search, $replace: "") {
+  $index: str-index($string, $search);
+
+  @if $index {
+    @return str-slice($string, 1, $index - 1) + $replace + str-replace(str-slice($string, $index + str-length($search)), $search, $replace);
+  }
+
+  @return $string;
+}
+
+@function linear($value-start, $value-end, $width-start: $width-start, $width-end: $width-end) {
+  $list: ();
+  @each $item in zip($value-start, $value-end) {
+    $tangent: (nth($item, 2) - nth($item, 1)) / ($width-end - $width-start);
+    $list: append($list, calc(#{nth($item, 1)} + (100vw - #{$width-start}) * #{$tangent}));
+  }
+  @return $list;
+}
+
+@function z($key, $map: $z-indexes) {
+  @return map-get($map, $key);
+}
+
+@function bp($key, $map: $breakpoints) {
+  @return map-get($map, $key);
+}
+
+@function easing($key, $map: $easings) {
+  @return map-get($map, $key);
+}
+
+@function t($key) {
+  @return map-get($theme, $key);
+}

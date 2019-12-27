@@ -1,0 +1,19 @@
+// Display
+@each $bp in map-keys($breakpoints) {
+  @if $bp != xs {
+    .hidden-#{$bp}-and-up {
+      @include up($bp) {
+        display: none !important;
+      }
+    }
+    .hidden-#{$bp}-and-down {
+      @include down($bp) {
+        display: none !important;
+      }
+    }
+  }
+}
+
+.visually-hidden {
+  @include visually-hidden();
+}

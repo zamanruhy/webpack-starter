@@ -1,0 +1,45 @@
+// Vue
+[v-cloak] {
+  display: none !important;
+}
+
+// Layout
+.app {
+  display: flex;
+  flex-direction: column;
+  max-width: 100%;
+  overflow: hidden;
+
+  &__inner {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+}
+
+.main {
+  flex: 1 0 auto;
+}
+
+.container {
+  @include container(true);
+}
+
+.h1 {
+  @extend h1;
+}
+.h2 {
+  @extend h2;
+}
+.h3 {
+  @extend h3;
+}
+.h4 {
+  @extend h4;
+}
+.h5 {
+  @extend h5;
+}
+.h6 {
+  @extend h6;
+}
