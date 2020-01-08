@@ -20,7 +20,7 @@ requireComponent.keys().forEach(fileName => {
   const componentConfig = requireComponent(fileName)
   const componentName = 'V' + fileName.replace(/^.+\/|\.\w+$/g, '')
   Vue.component(componentName, componentConfig.default || componentConfig)
-});
+})
 
 Vue.config.productionTip = false
 

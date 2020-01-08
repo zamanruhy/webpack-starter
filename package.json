@@ -70,6 +70,7 @@
     "html-beautify-webpack-plugin": "^1.0.5",
     "html-webpack-plugin": "^3.2.0",
     "http-server": "^0.12.1",
+    "husky": "^4.0.1",
     "image-webpack-loader": "^6.0.0",
     "jest": "^24.9.0",
     "jest-serializer-vue": "^2.0.2",
@@ -106,8 +107,10 @@
     "webpack-merge": "^4.2.2",
     "webpack-node-externals": "^1.7.2"
   },
-  "gitHooks": {
-    "pre-commit": "lint-staged"
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   },
   "lint-staged": {
     "*.{js,vue}": [
