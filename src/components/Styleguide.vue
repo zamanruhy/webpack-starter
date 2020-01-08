@@ -1,5 +1,8 @@
 <template>
   <div class="styleguide container">
+    <div>
+      <a href="/">Link</a>
+    </div>
     <v-button v-modal.main-modal variant="primary">
       Open Modal
     </v-button>
@@ -148,7 +151,14 @@
         <h4 v-collapse.collapse class="styleguide__title">
           Collapse
         </h4>
-        <v-collapse id="collapse" visible>
+        <v-collapse
+          id="collapse"
+          visible
+          @open="onEvent('open')"
+          @opened="onEvent('opened')"
+          @close="onEvent('close')"
+          @closed="onEvent('closed')"
+        >
           <div class="styleguide__slide">
             <v-spinner :size="70" :width="2"></v-spinner>
           </div>
@@ -184,7 +194,7 @@ export default {
   },
   methods: {
     async onEvent (e) {
-      console.log(this.event?.())
+      console.log(e)
     },
     onStart () {
       console.log('start', Date.now())

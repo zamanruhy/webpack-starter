@@ -107,7 +107,7 @@ export default {
   },
   computed: {
     computedOptions () {
-      let { pagination, navigation, scrollbar, ...plainOptions } = this.options
+      const { pagination, navigation, scrollbar, ...plainOptions } = this.options
       return {
         ...plainOptions,
         pagination: this.pagination ? {
@@ -223,17 +223,17 @@ export default {
     },
     genPaginationFns () {
       const obj = {}
-      if (this.$scopedSlots['bullet']) {
+      if (this.$scopedSlots.bullet) {
         obj.renderBullet = (index, className) => {
           return this.renderControl('bullet', { index, className })
         }
       }
-      if (this.$scopedSlots['fraction']) {
+      if (this.$scopedSlots.fraction) {
         obj.renderFraction = (currentClass, totalClass) => {
           return this.renderControl('fraction', { currentClass, totalClass })
         }
       }
-      if (this.$scopedSlots['progressbar']) {
+      if (this.$scopedSlots.progressbar) {
         obj.renderProgressbar = (progressbarFillClass) => {
           return this.renderControl('progressbar', { progressbarFillClass })
         }

@@ -15,8 +15,8 @@ export default {
 
     el.addEventListener(binding.arg || 'click', (event) => {
       event.preventDefault()
-      ids.forEach(id => {
-        vnode.context.$root.$emit('change::collapse', id)
+      ids.forEach((id) => {
+        vnode.context.$root.$emit('toggle::collapse', id)
       })
     })
 

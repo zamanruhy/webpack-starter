@@ -32,7 +32,7 @@ export default {
   computed: {
     classes () {
       return {
-        'hamburger_active': this.isActive
+        hamburger_active: this.isActive
       }
     }
   },

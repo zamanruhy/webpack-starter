@@ -1,4 +1,6 @@
 <script>
+import Spinner from './Spinner'
+
 export default {
   name: 'Button',
   functional: true,
@@ -14,13 +16,13 @@ export default {
     },
     loading: Boolean
   },
-  render (h, { props, data, children }) {
+  render (h, { props, data, slots }) {
     const componentData = {
       class: {
         [`button_${props.variant}`]: !!props.variant,
         [`button_${props.size}`]: !!props.size,
-        'button_block': props.block,
-        'button_loading': props.loading
+        button_block: props.block,
+        button_loading: props.loading
       }
     }
 
@@ -35,10 +37,10 @@ export default {
 
     return (
       <tag class="button" {...data} {...componentData}>
-        <span class="button__content">{children}</span>
+        <span class="button__content">{slots().default}</span>
         {
           props.loading &&
-          <v-spinner class="button__spinner" size={23} width={2} />
+          <Spinner class="button__spinner" size={23} width={2} />
         }
       </tag>
     )

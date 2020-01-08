@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import './directives'
-// import 'svgxuse'
 
 // Styles
 import '@/assets/scss/main.scss'

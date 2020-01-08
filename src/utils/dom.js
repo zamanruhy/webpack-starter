@@ -14,7 +14,7 @@ export function addClass (el, cls) {
       el.classList.add(cls)
     }
   } else {
-    let cur = ' ' + (el.getAttribute('class') || '') + ' '
+    const cur = ' ' + (el.getAttribute('class') || '') + ' '
     if (cur.indexOf(' ' + cls + ' ') < 0) {
       el.setAttribute('class', (cur + cls).trim())
     }
@@ -41,7 +41,7 @@ export function removeClass (el, cls) {
     }
   } else {
     let cur = ' ' + (el.getAttribute('class') || '') + ' '
-    let tar = ' ' + cls + ' '
+    const tar = ' ' + cls + ' '
     while (cur.indexOf(tar) >= 0) {
       cur = cur.replace(tar, ' ')
     }

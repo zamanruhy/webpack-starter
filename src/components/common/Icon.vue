@@ -1,16 +1,18 @@
 <script>
 const icons = {}
-const requireIcon = require.context('@/assets/svg', false, /\.svg$/)
-requireIcon.keys().forEach(fileName => {
-  const iconConfig = requireIcon(fileName)
-  // console.log(iconConfig.default || iconConfig)
-  const { id, viewBox, url } = iconConfig.default || iconConfig
-  const iconName = fileName.replace(/^\.\/|\.\w+$/g, '')
-  const [width, height] = viewBox.split(' ').slice(-2).map(Number)
-  icons[iconName] = { id: id.replace('-usage', ''), width, height, url }
-})
 
-// console.log(icons)
+/* istanbul ignore if */
+if (process.env.NODE_ENV !== 'test') {
+  const requireIcon = require.context('@/assets/svg', false, /\.svg$/)
+  requireIcon.keys().forEach(fileName => {
+    const iconConfig = requireIcon(fileName)
+    // console.log(iconConfig.default || iconConfig)
+    const { id, viewBox, url } = iconConfig.default || iconConfig
+    const iconName = fileName.replace(/^\.\/|\.\w+$/g, '')
+    const [width, height] = viewBox.split(' ').slice(-2).map(Number)
+    icons[iconName] = { id: id.replace('-usage', ''), width, height, url }
+  })
+}
 
 export default {
   name: 'Icon',
@@ -21,17 +23,17 @@ export default {
       default: ''
     },
     left: Boolean,
-    right: Boolean,
-    img: Boolean
+    right: Boolean
+    // img: Boolean
   },
   render (h, { props, data }) {
-    const { id, width, height } = icons[props.name]
+    const { id, width, height } = icons[props.name] || {}
     const componentData = {
       class: {
-        'icon': true,
+        icon: true,
         [`icon_${props.name}`]: !!props.name,
-        'icon_left': props.left,
-        'icon_right': props.right
+        icon_left: props.left,
+        icon_right: props.right
       },
       style: {
         height: '1em',

@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ToTop.vue should render and match snapshot 1`] = `
+<button type="button" aria-label="Scroll to top" data-fixed="margin" class="to-top" style="display: none;" name="to-top">
+  <icon-stub name="house" class="to-top__icon"></icon-stub>
+</button>
+`;

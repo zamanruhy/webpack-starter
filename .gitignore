@@ -4,6 +4,9 @@ node_modules
 # production
 dist
 
+# testing
+coverage
+
 # misc
 .idea
 .vscode

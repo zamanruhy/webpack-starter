@@ -8,6 +8,7 @@ export default {
 
     el.addEventListener('click', (e) => {
       e.preventDefault()
+      console.log('clicked')
       vnode.context.$root.$emit('show::modal', id)
     })
   }

@@ -8,18 +8,26 @@
       data-fixed="margin"
       @click="onClick"
     >
-      <v-icon name="house" class="to-top__icon" />
+      <Icon name="house" class="to-top__icon" />
     </button>
   </transition>
 </template>
 
 <script>
+import Icon from './Icon'
+
 export default {
   name: 'ToTop',
+  components: { Icon },
   data () {
     return {
-      visible: false,
-      offset: 600
+      offset: 600,
+      scrollTop: 0
+    }
+  },
+  computed: {
+    visible () {
+      return this.scrollTop > this.offset
     }
   },
   mounted () {
@@ -29,16 +37,18 @@ export default {
     window.removeEventListener('scroll', this.onScroll)
   },
   methods: {
+    /* istanbul ignore next */
     onScroll () {
-      this.visible = window.pageYOffset > this.offset
+      this.scrollTop = window.pageYOffset
     },
     onClick () {
-      this.smoothScroll()
+      this.scrollToTop()
     },
-    smoothScroll () {
-      let currentScroll = window.pageYOffset
+    /* istanbul ignore next */
+    scrollToTop () {
+      const currentScroll = window.pageYOffset
       if (currentScroll > 0) {
-        window.requestAnimationFrame(this.smoothScroll)
+        window.requestAnimationFrame(this.scrollToTop)
         window.scrollTo(0, Math.floor(currentScroll - (currentScroll / 5)))
       }
     }

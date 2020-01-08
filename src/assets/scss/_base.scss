@@ -1,16 +1,17 @@
-//*, *:before, *:after {
-//  box-sizing: border-box;
-//}
-
 :focus {
-  outline: none !important;
+  outline: 0 !important;
+
+  &:hover,
+  &:active {
+    //outline: 0;
+  }
   //outline: 2px solid red !important;
 }
 
-::selection {
-  background: #b3d4fc;
-  text-shadow: none;
-}
+//a:active,
+//a:hover {
+//  outline: 0;
+//}
 
 html {
   font-size: 16px;
@@ -24,15 +25,6 @@ body {
   color: $body-color;
   background-color: $body-bg;
 }
-
-//audio,
-//canvas,
-//iframe,
-//img,
-//svg,
-//video {
-//  vertical-align: middle;
-//}
 
 img {
   max-width: 100%;
@@ -48,21 +40,17 @@ textarea {
   letter-spacing: inherit;
 }
 
-//textarea {
-//  resize: vertical;
-//}
+ol,
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
 
-//ol,
-//ul {
-//  margin: 0;
-//  padding: 0;
-//  list-style: none;
-//}
-//
-//td,
-//th {
-//  padding: 0;
-//}
+td,
+th {
+  padding: 0;
+}
 
 a {
   text-decoration: none;

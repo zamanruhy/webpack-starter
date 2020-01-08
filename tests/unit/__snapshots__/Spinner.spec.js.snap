@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Spinner.vue should render and match snapshot 1`] = `
+<div class="spinner" style="width: 23px; height: 23px;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 43.80952380952381 43.80952380952381" class="spinner__svg">
+    <circle fill="transparent" cx="21.904761904761905" cy="21.904761904761905" r="20" stroke-width="3.8095238095238093" stroke-dasharray="125.664" stroke-dashoffset="125.66370614359172px" class="spinner__circle"></circle>
+  </svg></div>
+`;

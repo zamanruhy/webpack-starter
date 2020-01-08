@@ -58,7 +58,7 @@ export default {
   },
   mounted () {
     if (this.id) {
-      this.$root.$on('change::collapse', this.toggleHandler)
+      this.$root.$on('toggle::collapse', this.toggleHandler)
       if (this.accordion) {
         this.$root.$on('collapse::accordion', this.accordionHandler)
       }
@@ -66,7 +66,7 @@ export default {
   },
   beforeDestroy () {
     if (this.id) {
-      this.$root.$off('change::collapse', this.toggleHandler)
+      this.$root.$off('toggle::collapse', this.toggleHandler)
       if (this.accordion) {
         this.$root.$off('collapse::accordion', this.accordionHandler)
       }
@@ -78,25 +78,23 @@ export default {
     },
     onEnter (el) {
       el.style.height = 0
-      // eslint-disable-next-line
-      el.offsetHeight
+      el.offsetHeight // eslint-disable-line
       el.style.height = el.scrollHeight + 'px'
-      this.$emit('show')
+      this.$emit('open')
     },
     onAfterEnter (el) {
       el.style.height = null
-      this.$emit('shown')
+      this.$emit('opened')
     },
     onLeave (el) {
       el.style.height = el.scrollHeight + 'px'
-      // eslint-disable-next-line
-      el.offsetHeight
+      el.offsetHeight // eslint-disable-line
       el.style.height = 0
-      this.$emit('hide')
+      this.$emit('close')
     },
     onAfterLeave (el) {
       el.style.height = null
-      this.$emit('hidden')
+      this.$emit('closed')
     },
     emitChange () {
       this.$emit('change', this.isVisible)

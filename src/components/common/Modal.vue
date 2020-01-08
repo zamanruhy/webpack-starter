@@ -1,5 +1,9 @@
 <template>
-  <portal v-if="!isHidden" :disabled="isHidden">
+  <Portal
+    v-if="!isHidden"
+    :disabled="isHidden"
+    selector="#modal-portal"
+  >
     <div
       :id="id"
       ref="modal"
@@ -39,24 +43,30 @@
               aria-label="Close modal"
               @click="hide"
             >
-              <v-icon name="close" />
+              <Icon name="close" />
             </button>
             <slot />
           </div>
         </div>
       </transition>
     </div>
-    <v-backdrop :visible="isVisible" @click="onClickOut" />
-  </portal>
+    <Backdrop :visible="isVisible" @click="onClickOut" />
+  </Portal>
 </template>
 
 <script>
 import popupMixin from '@/mixins/popup'
 import { Portal } from '@linusborg/vue-simple-portal'
+import Backdrop from './Backdrop'
+import Icon from './Icon'
 
 export default {
   name: 'Modal',
-  components: { Portal },
+  components: {
+    Portal,
+    Backdrop,
+    Icon
+  },
   mixins: [popupMixin],
   inheritAttrs: false,
   model: {
@@ -151,10 +161,7 @@ export default {
         return
       }
       this.emitEvent('hide')
-      if (this._observer) {
-        this._observer.disconnect()
-        this._observer = null
-      }
+      this.unobserveDom()
       this.isVisible = false
       this.$emit('change', false)
     },
@@ -165,7 +172,6 @@ export default {
     },
     onEnter () {
       this.checkModalOverflow()
-      // this.$refs.modal.scrollTop = 0
     },
     onAfterEnter () {
       this.isTransitioning = false
@@ -209,7 +215,7 @@ export default {
       const active = document.activeElement
       const { content } = this.$refs
       if (!content.contains(active)) {
-        content.focus({ preventScroll: true })
+        content.focus()
         this.$refs.modal.scrollTop = 0
       }
     },
@@ -258,6 +264,12 @@ export default {
         attributeFilter: ['style', 'class']
       })
     },
+    unobserveDom () {
+      if (this._observer) {
+        this._observer.disconnect()
+        this._observer = null
+      }
+    },
     showHandler (id) {
       if (id === this.id) {
         this.show()
@@ -290,13 +302,9 @@ $modal-padding-y: 30px;
   overflow-x: hidden;
   overflow-y: auto;
   z-index: z(modal);
-  /*display: flex;*/
-  /*padding: 30px 0;*/
 
   &__dialog {
     margin: $modal-padding-y auto;
-    /*margin-top: 0;*/
-    /*flex: 0 1 auto;*/
     min-height: calc(100% - #{$modal-padding-y} * 2);
     width: 100%;
     display: flex;

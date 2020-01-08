@@ -52,7 +52,7 @@ export default {
   computed: {
     classes () {
       return {
-        'checkbox_single': !this.label
+        checkbox_single: !this.label
       }
     }
   },

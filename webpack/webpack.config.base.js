@@ -1,6 +1,5 @@
 'use strict'
 
-// require('@babel/register')
 const fs = require('fs')
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
@@ -9,7 +8,6 @@ const { VueLoaderPlugin } = require('vue-loader')
 const SpriteLoaderPlugin = require('svg-sprite-loader/plugin')
 const RemoveAssetsPlugin = require('./plugins/remove-assets')
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin')
-// const PreloadWebpackPlugin = require('preload-webpack-plugin')
 
 const isDev = process.env.NODE_ENV === 'development'
 
@@ -19,18 +17,18 @@ function resolve (dir) {
 
 module.exports = {
   entry: {
-    app: resolve('src/index.js')
+    app: resolve('src/main.js')
   },
   output: {
     path: resolve('dist'),
-    filename: 'static/js/[name].js?[hash:8]',
+    filename: 'static/js/[name].js',
     publicPath: '/'
   },
   resolve: {
     extensions: ['.js', '.vue', '.json'],
     alias: {
       '@': resolve('src'),
-      'vue$': 'vue/dist/vue.common.js'
+      vue$: 'vue/dist/vue.common.js'
     }
   },
   module: {
@@ -52,7 +50,7 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        use: ['cache-loader', 'thread-loader', 'babel-loader']
+        use: ['cache-loader', 'babel-loader']
       },
       {
         test: /\.svg$/,
@@ -63,7 +61,7 @@ module.exports = {
             options: {
               symbolId: 'icon-[name]',
               extract: true,
-              spriteFilename: 'static/img/sprite.svg?[hash:8]'
+              spriteFilename: 'static/img/sprite.svg'
             }
           },
           'svgo-loader'
@@ -76,7 +74,7 @@ module.exports = {
           {
             loader: 'file-loader',
             options: {
-              name: 'static/img/[name].[ext]?[hash:8]'
+              name: 'static/img/[name].[ext]'
             }
           },
           {
@@ -89,14 +87,14 @@ module.exports = {
         test: /\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/,
         loader: 'file-loader',
         options: {
-          name: 'static/media/[name].[ext]?[hash:8]'
+          name: 'static/media/[name].[ext]'
         }
       },
       {
         test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
         loader: 'file-loader',
         options: {
-          name: 'static/fonts/[name].[ext]?[hash:8]'
+          name: 'static/fonts/[name].[ext]'
         }
       },
       {
@@ -142,15 +140,6 @@ module.exports = {
       //   chunks: 'async'
       // }
     })
-    // new PreloadWebpackPlugin({
-    //   rel: 'preload',
-    //   as (entry) {
-    //     if (/\.css(\?.*)?$/.test(entry)) return 'style'
-    //     if (/\.(woff2?|eot|ttf|otf)(\?.*)?$/.test(entry)) return 'font'
-    //     if (/\.(png|jpe?g|gif|svg|webp)(\?.*)?$/.test(entry)) return 'image'
-    //     return 'script'
-    //   }
-    // })
   ]
 }
 

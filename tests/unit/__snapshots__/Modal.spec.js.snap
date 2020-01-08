@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Modal.vue should render and match snapshot 1`] = `
+<portal-stub selector="#modal-portal" tag="DIV">
+  <div id="" class="modal">
+    <div class="modal__dialog" style="display: none;" enter-class="modal__dialog_out" enter-to-class="" enter-active-class="" leave-class="" leave-to-class="modal__dialog_out" leave-active-class="">
+      <div tabindex="-1" class="modal__content"><button type="button" aria-label="Close modal" class="modal__close">
+          <icon-stub name="close"></icon-stub>
+        </button> </div>
+    </div>
+  </div>
+  <backdrop-stub></backdrop-stub>
+</portal-stub>
+`;

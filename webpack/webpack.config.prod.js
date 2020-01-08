@@ -7,7 +7,7 @@ const baseConfig = require('./webpack.config.base')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
-const CompressionPlugin = require('compression-webpack-plugin')
+// const CompressionPlugin = require('compression-webpack-plugin')
 const HtmlBeautifyPlugin = require('html-beautify-webpack-plugin')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const VuePlugin = require('./plugins/vue')
@@ -15,6 +15,7 @@ const VuePlugin = require('./plugins/vue')
 module.exports = merge(baseConfig, {
   mode: 'production',
   output: {
+    filename: 'static/js/[name].js?[contenthash:8]',
     publicPath: ''
   },
   optimization: {
@@ -33,7 +34,8 @@ module.exports = merge(baseConfig, {
       new TerserPlugin({
         cache: true,
         parallel: true,
-        sourceMap: false
+        sourceMap: false,
+        extractComments: false
       }),
       new OptimizeCSSAssetsPlugin({
         cssProcessorPluginOptions: {
@@ -53,7 +55,6 @@ module.exports = merge(baseConfig, {
             loader: MiniCssExtractPlugin.loader,
             options: { publicPath: '../../' }
           },
-          'cache-loader',
           'css-loader',
           'postcss-loader',
           'sass-loader',
@@ -67,7 +68,7 @@ module.exports = merge(baseConfig, {
       },
       {
         test: /\.vue$/,
-        loader: path.resolve(__dirname, './loaders/vue.js'),
+        loader: path.resolve(__dirname, './loaders/vue.js')
         // enforce: 'pre'
       }
     ]
@@ -75,14 +76,14 @@ module.exports = merge(baseConfig, {
   plugins: [
     new webpack.HashedModuleIdsPlugin(),
     new MiniCssExtractPlugin({
-      filename: 'static/css/[name].css?[hash:8]'
+      filename: 'static/css/[name].css?[contenthash:8]'
     }),
-    new CompressionPlugin({
-      algorithm: 'gzip',
-      test: /\.(js|css)(\?.*)?$/,
-      threshold: 10240,
-      minRatio: 0.8
-    }),
+    // new CompressionPlugin({
+    //   algorithm: 'gzip',
+    //   test: /\.(js|css)(\?.*)?$/,
+    //   threshold: 10240,
+    //   minRatio: 0.8
+    // }),
     new HtmlBeautifyPlugin({
       config: {
         html: {
